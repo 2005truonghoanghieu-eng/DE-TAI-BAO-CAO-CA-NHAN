@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tiệm Điện Của Hiếu</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="header">
+  <a class="brand" href="index.html">⚡ Tiệm Điện Của Hiếu</a>
+  <nav class="nav">
+    <ul class="menu">
+      <li><a href="index.html">Trang chủ</a></li>
+      <li><a href="products.html">Sản phẩm</a></li>
+      <li class="dropdown">
+  <a href="category.html?cat=dien-gia-dung">Danh mục ▾</a>
+  <ul class="dropdown-menu">
+    <li><a href="category.html?cat=dien-gia-dung">Điện gia dụng</a></li>
+    <li><a href="category.html?cat=nha-bep">Nhà bếp</a></li>
+    <li><a href="category.html?cat=lam-mat">Làm mát</a></li>
+    <li><a href="category.html?cat=phu-kien">Phụ kiện</a></li>
+  </ul>
+</li>
+
+      <li><a href="contact.html">Liên hệ</a></li>
+      <li><a href="cart.html">🛒 Giỏ (<span id="cartCount">0</span>)</a></li>
+    </ul>
+  </nav>
+</header>
+
+  <section class="hero section">
+    <h1>Mua đồ điện – đồ điện tử chính hãng</h1>
+    <p>Điện gia dụng • Nhà bếp • Làm mát • Phụ kiện điện</p>
+    <a class="btn" href="products.html">Xem tất cả sản phẩm</a>
+  </section>
+
+  <main class="section">
+  <section id="about">
+    <h2>Giới thiệu</h2>
+    <p>
+      Tiệm Điện Của Hiếu chuyên cung cấp đồ điện – đồ điện tử gia dụng, phụ kiện điện,
+      thiết bị nhà bếp và thiết bị làm mát. Website được xây dựng phục vụ bài tập
+      môn Lập trình Web, mô phỏng một cửa hàng bán đồ điện trực tuyến.
+    </p>
+  </section>
+
+  <!-- DANH MỤC -->
+  <section id="categories" style="margin-top:24px;">
+    <h2>Danh mục nổi bật</h2>
+    <div class="row2">
+      <a class="btn-outline" href="category.html?cat=dien-gia-dung">Điện gia dụng</a>
+      <a class="btn-outline" href="category.html?cat=nha-bep">Nhà bếp</a>
+      <a class="btn-outline" href="category.html?cat=lam-mat">Làm mát</a>
+      <a class="btn-outline" href="category.html?cat=phu-kien">Phụ kiện</a>
+    </div>
+  </section>
+
+  <!-- SẢN PHẨM -->
+  <section id="products" style="margin-top:24px;">
+    <h2>Sản phẩm mới</h2>
+    <div class="carousel">
+  <button class="car-btn prev" id="homePrev" aria-label="Trước">‹</button>
+
+  <div class="car-viewport" id="homeViewport">
+    <div class="car-track" id="homeTrack"></div>
+  </div>
+
+  <button class="car-btn next" id="homeNext" aria-label="Sau">›</button>
+</div>
+
+  </section>
+
+  <!-- LIÊN HỆ -->
+  <section id="contact" class="contact-section">
+  <div class="contact-title">LIÊN HỆ</div>
+
+  <div class="contact-wrap">
+    <!-- FORM (TRÁI) -->
+    <div class="contact-box">
+      <form id="contactForm2" class="contact-form2">
+        <input type="text" id="c_name" placeholder="Họ và tên *" required>
+        <input type="email" id="c_email" placeholder="Email *" required>
+        <input type="text" id="c_subject" placeholder="Tiêu đề *" required>
+        <textarea id="c_message" rows="6" placeholder="Nội dung *" required></textarea>
+
+        <button type="submit" class="contact-btn">GỬI TIN NHẮN</button>
+      </form>
+    </div>
+
+    <!-- THÔNG TIN (PHẢI) -->
+    <div class="contact-box info-box">
+      <h3>THÔNG TIN LIÊN HỆ</h3>
+      <p><b>Website:</b> Tiệm Điện Của Hiếu</p>
+      <p><b>Email:</b> hieu231A29005@example.com</p>
+      <p><b>Điện thoại:</b> 0123 456 789</p>
+      <p><b>Facebook:</b> <a href="#" class="link">Tiệm Điện Của Hiếu</a></p>
+
+      <div class="social">
+        <a class="social-item fb" href="#" title="Facebook">f</a>
+        <a class="social-item tw" href="#" title="Twitter">x</a>
+        <a class="social-item ig" href="#" title="Instagram">ig</a>
+        <a class="social-item yt" href="#" title="YouTube">▶</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- POPUP -->
+  <div id="toast" class="toast">Cảm ơn bạn đã liên hệ!</div>
+</section>
+  </main>
+
+  <footer class="footer">© 2026 Tiệm Điện Của Hiếu</footer>
+	<script src="products_data.js"></script>
+<script src="app.js"></script>
+<script>
+window.addEventListener("DOMContentLoaded", function () {
+  const track = document.getElementById("homeTrack");
+  const viewport = document.getElementById("homeViewport");
+  const btnPrev = document.getElementById("homePrev");
+  const btnNext = document.getElementById("homeNext");
+
+  const list = (typeof PRODUCTS !== "undefined") ? PRODUCTS : (window.PRODUCTS || []);
+  if (!track || !viewport || !list.length) return;
+
+  const items = list.slice(0, 12);
+
+  track.innerHTML = items.map(p => `
+    <article class="card">
+      <div class="thumb">
+        <img src="${p.img}" alt="${escapeHtml(p.name)}">
+      </div>
+      <h3>${escapeHtml(p.name)}</h3>
+      <p class="meta">${escapeHtml(p.brand || "")}</p>
+      <p class="price">${formatVND(p.price)}</p>
+      <div class="row2">
+        <a class="btn-outline" href="product.html?id=${encodeURIComponent(p.id)}">Chi tiết</a>
+        <button class="btn-outline add" data-id="${p.id}">Thêm</button>
+      </div>
+    </article>
+  `).join("");
+
+  track.querySelectorAll(".add").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.id;
+      const product = list.find(x => x.id === id);
+      addToCart(product, 1);
+      btn.textContent = "Đã thêm";
+      setTimeout(()=>btn.textContent="Thêm", 700);
+    });
+  });
+
+  let index = 0;
+  function cardStep(){
+    const firstCard = track.querySelector(".card");
+    if (!firstCard) return 260;
+    const style = getComputedStyle(track);
+    const gap = parseFloat(style.gap || "16");
+    return firstCard.getBoundingClientRect().width + gap;
+  }
+  function visibleCount(){
+    const step = cardStep();
+    return Math.max(1, Math.floor(viewport.clientWidth / step));
+  }
+  function maxIndex(){
+    return Math.max(0, items.length - visibleCount());
+  }
+  function renderPos(){
+    const step = cardStep();
+    track.style.transform = `translateX(${-index * step}px)`;
+  }
+
+  btnPrev.onclick = () => { index = Math.max(0, index - 1); renderPos(); };
+  btnNext.onclick = () => { index = Math.min(maxIndex(), index + 1); renderPos(); };
+
+  window.onresize = () => {
+    index = Math.min(index, maxIndex());
+    renderPos();
+  };
+
+  renderPos();
+});
+</script>
+<script>
+  // Validate + popup
+  const form2 = document.getElementById("contactForm2");
+  const toast = document.getElementById("toast");
+
+  function showToast(){
+    toast.classList.add("show");
+    setTimeout(()=>toast.classList.remove("show"), 2000);
+  }
+
+  form2.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const name = document.getElementById("c_name").value.trim();
+    const email = document.getElementById("c_email").value.trim();
+    const subject = document.getElementById("c_subject").value.trim();
+    const message = document.getElementById("c_message").value.trim();
+
+    // kiểm tra đơn giản
+    if(!name || !email || !subject || !message){
+      alert("Vui lòng nhập đầy đủ thông tin!");
+      return;
+    }
+
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if(!emailOk){
+      alert("Email không hợp lệ!");
+      return;
+    }
+
+    showToast();
+    form2.reset();
+  });
+</script>
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    const grid = document.getElementById("homeGrid");
+    if (!grid) return;
+
+    // hỗ trợ cả 2 kiểu khai báo
+    const list = (typeof PRODUCTS !== "undefined")
+      ? PRODUCTS
+      : (window.PRODUCTS || []);
+
+    if (!list.length) {
+      grid.innerHTML = "<p class='small'>Chưa load được dữ liệu sản phẩm.</p>";
+      return;
+    }
+
+    const items = list.slice(0, 8);
+
+    grid.innerHTML = items.map(p => `
+  <article class="card">
+    <div class="thumb">
+      <img src="${p.img}" alt="${p.name}">
+    </div>
+    <h3>${p.name}</h3>
+    <p class="price">${formatVND(p.price)}</p>
+    <div class="row2">
+      <a class="btn-outline" href="product.html?id=${encodeURIComponent(p.id)}">Chi tiết</a>
+      <button class="btn-outline add" data-id="${p.id}">Thêm</button>
+    </div>
+  </article>
+`).join("");
+
+
+    grid.querySelectorAll(".add").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.dataset.id;
+        const product = list.find(x => x.id === id);
+        addToCart(product, 1);
+        btn.textContent = "Đã thêm";
+        setTimeout(()=>btn.textContent="Thêm", 700);
+      });
+    });
+  });
+</script>
+</body>
+</html>

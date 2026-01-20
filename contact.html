@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Liên hệ</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="header">
+  <a class="brand" href="index.html">⚡ Tiệm Điện Của Hiếu</a>
+  <nav class="nav">
+    <ul class="menu">
+      <li><a href="index.html">Trang chủ</a></li>
+      <li><a href="products.html">Sản phẩm</a></li>
+      <li class="dropdown">
+  <a href="category.html?cat=dien-gia-dung">Danh mục ▾</a>
+  <ul class="dropdown-menu">
+    <li><a href="category.html?cat=dien-gia-dung">Điện gia dụng</a></li>
+    <li><a href="category.html?cat=nha-bep">Nhà bếp</a></li>
+    <li><a href="category.html?cat=lam-mat">Làm mát</a></li>
+    <li><a href="category.html?cat=phu-kien">Phụ kiện</a></li>
+  </ul>
+</li>
+      <li><a href="contact.html">Liên hệ</a></li>
+      <li><a href="cart.html">🛒 Giỏ (<span id="cartCount">0</span>)</a></li>
+    </ul>
+  </nav>
+</header>
+
+  <main class="section">
+  <section id="contact" class="contact-section">
+    <div class="contact-title">LIÊN HỆ</div>
+
+    <div class="contact-wrap">
+      <!-- FORM -->
+      <div class="contact-box">
+        <form id="contactForm2" class="contact-form2">
+          <input type="text" id="c_name" placeholder="Họ và tên *" required>
+          <input type="email" id="c_email" placeholder="Email *" required>
+          <input type="text" id="c_subject" placeholder="Tiêu đề *" required>
+          <textarea id="c_message" rows="6" placeholder="Nội dung *" required></textarea>
+
+          <button type="submit" class="contact-btn">GỬI TIN NHẮN</button>
+        </form>
+      </div>
+
+      <!-- THÔNG TIN -->
+      <div class="contact-box info-box">
+        <h3>THÔNG TIN LIÊN HỆ</h3>
+        <p><b>Website:</b> Tiệm Điện Của Hiếu</p>
+        <p><b>Email:</b> hieu231A29005@st.vhu.edu.vn</p>
+        <p><b>Điện thoại:</b> 0123 456 789</p>
+        <p><b>Facebook:</b> <a href="#" class="link">Tiệm Điện Của Hiếu</a></p>
+
+        <div class="social">
+          <a class="social-item fb" href="#">f</a>
+          <a class="social-item tw" href="#">x</a>
+          <a class="social-item ig" href="#">ig</a>
+          <a class="social-item yt" href="#">▶</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast">Cảm ơn bạn đã liên hệ!</div>
+  </section>
+</main>
+
+
+  <footer class="footer">© 2026 Tiệm Điện Của Hiếu</footer>
+
+  <script src="app.js"></script>
+  <script src="contact_page.js"></script>
+  <script>
+  const form2 = document.getElementById("contactForm2");
+  const toast = document.getElementById("toast");
+
+  function showToast(){
+    toast.classList.add("show");
+    setTimeout(()=>toast.classList.remove("show"), 2000);
+  }
+
+  form2.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const name = c_name.value.trim();
+    const email = c_email.value.trim();
+    const subject = c_subject.value.trim();
+    const message = c_message.value.trim();
+
+    if(!name || !email || !subject || !message){
+      alert("Vui lòng nhập đầy đủ thông tin!");
+      return;
+    }
+
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if(!emailOk){
+      alert("Email không hợp lệ!");
+      return;
+    }
+
+    showToast();
+    this.reset();
+  });
+</script>
+</body>
+</html>
